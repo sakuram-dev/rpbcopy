@@ -5,9 +5,10 @@ use std::io::{self, Read};
 #[derive(Parser, Debug)]
 #[command(about = "Copy data from STDIN to the clipboard.")]
 #[command(version, long_about = None)]
+#[command(next_line_help = true)]
 struct Args {
     #[clap(short, long)]
-    #[clap(help = "copy from file instead of STDIN")]
+    #[clap(help = "Copy from file instead of STDIN")]
     file: Option<String>,
 }
 
