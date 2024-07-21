@@ -17,11 +17,13 @@ fn main() {
     let mut input_data = String::new();
 
     if let Some(file) = args.file {
-        let mut file_data = String::new();
-        std::fs::File::open(file)
-            .expect("Failed to open file")
-            .read_to_string(&mut file_data)
-            .expect("Failed to read file");
+        let file_data = match std::fs::read_to_string(&file) {
+            Ok(data) => data,
+            Err(e) => {
+                eprintln!("Failed to read file: {}", e);
+                std::process::exit(1);
+            }
+        };
 
         println!("Copy to clipboard \n{}", file_data);
         clipboard
